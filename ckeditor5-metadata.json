@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    {
+      "name": "Anchor drupal",
+      "className": "AnchorDrupal",
+      "description": "Adds text to the editor.",
+      "path": "src/anchordrupal.js",
+      "uiComponents": [
+        {
+          "name": "anchorDrupal",
+          "type": "Button",
+          "iconPath": "theme/icons/ckeditor.svg"
+        }
+      ]
+    }
+  ]
+}
