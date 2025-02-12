@@ -1,17 +1,19 @@
 import { describe, expect, it } from 'vitest';
-import { AnchorDrupal as AnchorDrupalDll, icons } from '../src/index.js';
-import AnchorDrupal from '../src/anchordrupal.js';
+import { Anchor as AnchorDrupalDll, icons } from '../src/index.js';
+import Anchor from '../src/anchor.js';
 
-import ckeditor from './../theme/icons/ckeditor.svg';
+import anchor from './../theme/icons/anchor.svg';
+import unanchor from './../theme/icons/unanchor.svg';
 
 describe( 'CKEditor5 AnchorDrupal DLL', () => {
 	it( 'exports AnchorDrupal', () => {
-		expect( AnchorDrupalDll ).to.equal( AnchorDrupal );
+		expect( AnchorDrupalDll ).to.equal( Anchor );
 	} );
 
 	describe( 'icons', () => {
 		it( 'exports the "ckeditor" icon', () => {
-			expect( icons.ckeditor ).to.equal( ckeditor );
+			expect( icons.anchor ).to.equal( anchor );
+			expect( icons.unanchor ).to.equal( unanchor );
 		} );
 	} );
 } );

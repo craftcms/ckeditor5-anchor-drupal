@@ -1,94 +1,119 @@
 import CKEditorInspector from '@ckeditor/ckeditor5-inspector';
 
-import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
+import 'ckeditor5/ckeditor5.css';
+import '../dist/index-editor.css';
+import '../dist/index.css';
+import {
+	Autoformat,
+	Base64UploadAdapter,
+	BlockQuote,
+	Bold,
+	ClassicEditor,
+	Code,
+	CodeBlock,
+	Essentials,
+	GeneralHtmlSupport,
+	Heading,
+	Image,
+	ImageCaption,
+	ImageStyle,
+	ImageToolbar,
+	ImageUpload,
+	Indent,
+	Italic,
+	Link,
+	List,
+	MediaEmbed,
+	Paragraph,
+	Table,
+	TableToolbar
+} from 'ckeditor5';
 
-import { Autoformat } from '@ckeditor/ckeditor5-autoformat';
-import { Bold, Code, Italic } from '@ckeditor/ckeditor5-basic-styles';
-import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
-import { CodeBlock } from '@ckeditor/ckeditor5-code-block';
-import { Essentials } from '@ckeditor/ckeditor5-essentials';
-import { Heading } from '@ckeditor/ckeditor5-heading';
-import { Image, ImageCaption, ImageStyle, ImageToolbar, ImageUpload } from '@ckeditor/ckeditor5-image';
-import { Indent } from '@ckeditor/ckeditor5-indent';
-import { Link } from '@ckeditor/ckeditor5-link';
-import { List } from '@ckeditor/ckeditor5-list';
-import { MediaEmbed } from '@ckeditor/ckeditor5-media-embed';
-import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
-import { Table, TableToolbar } from '@ckeditor/ckeditor5-table';
-import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
-
-import AnchorDrupal from '../src/anchordrupal.js';
+import { Anchor } from '../dist/index.js';
 
 /* global document, window */
 
-ClassicEditor
-	.create( document.querySelector( '#editor' ), {
-		licenseKey: 'GPL',
-		plugins: [
-			AnchorDrupal,
-			Essentials,
-			Autoformat,
-			BlockQuote,
-			Bold,
-			Heading,
-			Image,
-			ImageCaption,
-			ImageStyle,
-			ImageToolbar,
-			ImageUpload,
-			Indent,
-			Italic,
-			Link,
-			List,
-			MediaEmbed,
-			Paragraph,
-			Table,
-			TableToolbar,
-			CodeBlock,
-			Code,
-			Base64UploadAdapter
-		],
+ClassicEditor.create( document.querySelector( '#editor' ), {
+	plugins: [
+		Anchor,
+		Essentials,
+		Autoformat,
+		BlockQuote,
+		Bold,
+		Heading,
+		Image,
+		ImageCaption,
+		ImageStyle,
+		ImageToolbar,
+		ImageUpload,
+		Indent,
+		Italic,
+		Link,
+		List,
+		MediaEmbed,
+		Paragraph,
+		Table,
+		TableToolbar,
+		CodeBlock,
+		Code,
+		Base64UploadAdapter,
+		GeneralHtmlSupport
+	],
+	licenseKey: 'GPL',
+	toolbar: [
+		'anchor',
+		'|',
+		'heading',
+		'|',
+		'bold',
+		'italic',
+		'link',
+		'code',
+		'bulletedList',
+		'numberedList',
+		'|',
+		'outdent',
+		'indent',
+		'|',
+		'uploadImage',
+		'blockQuote',
+		'insertTable',
+		'mediaEmbed',
+		'codeBlock',
+		'|',
+		'undo',
+		'redo'
+	],
+	image: {
 		toolbar: [
-			'anchorDrupal',
+			'imageStyle:inline',
+			'imageStyle:block',
+			'imageStyle:side',
 			'|',
-			'heading',
-			'|',
-			'bold',
-			'italic',
-			'link',
-			'code',
-			'bulletedList',
-			'numberedList',
-			'|',
-			'outdent',
-			'indent',
-			'|',
-			'uploadImage',
-			'blockQuote',
-			'insertTable',
-			'mediaEmbed',
-			'codeBlock',
-			'|',
-			'undo',
-			'redo'
+			'imageTextAlternative'
+		]
+	},
+	table: {
+		contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+	},
+	htmlSupport: {
+		allow: [
+			{
+				name: /.*/,
+				attributes: true,
+				classes: true,
+				styles: true
+			}
 		],
-		image: {
-			toolbar: [
-				'imageStyle:inline',
-				'imageStyle:block',
-				'imageStyle:side',
-				'|',
-				'imageTextAlternative'
-			]
-		},
-		table: {
-			contentToolbar: [
-				'tableColumn',
-				'tableRow',
-				'mergeTableCells'
-			]
-		}
-	} )
+		disallow: [
+			{
+				name: 'a',
+				attributes: [ 'id', 'name' ],
+				classes: 'ck-anchor'
+			}
+		]
+	}
+} )
 	.then( editor => {
 		window.editor = editor;
 		CKEditorInspector.attach( editor );

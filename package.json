@@ -1,14 +1,13 @@
 {
   "name": "@northernco/ckeditor5-anchor-drupal",
-  "version": "0.0.1",
-  "description": "A plugin for CKEditor 5.",
+  "version": "1.0.0",
+  "description": "Drupal CKEditor 5 integration",
   "keywords": [
     "ckeditor",
     "ckeditor5",
     "ckeditor 5",
     "ckeditor5-feature",
     "ckeditor5-plugin",
-    "ckeditor5-dll",
     "ckeditor5-package-generator"
   ],
   "type": "module",
@@ -19,7 +18,7 @@
     "./*": "./dist/*",
     "./browser/*": null,
     "./build/*": "./build/*",
-		"./src/*": "./src/*",
+    "./src/*": "./src/*",
     "./package.json": "./package.json"
   },
   "license": "MIT",
@@ -39,8 +38,8 @@
     "@ckeditor/ckeditor5-dev-build-tools": "43.0.1",
     "@ckeditor/ckeditor5-inspector": ">=4.1.0",
     "@ckeditor/ckeditor5-package-tools": "^3.0.1",
-    "@vitest/coverage-istanbul": "^2.0.5",
     "@vitest/browser": "^2.0.5",
+    "@vitest/coverage-istanbul": "^2.0.5",
     "ckeditor5": "latest",
     "eslint": "^7.32.0",
     "eslint-config-ckeditor5": ">=9.0.0",
@@ -81,5 +80,9 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-image": "^44.2.0",
+    "lodash-es": "^4.17.21"
   }
 }

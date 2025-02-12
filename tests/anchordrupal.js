@@ -3,13 +3,14 @@ import { Essentials } from '@ckeditor/ckeditor5-essentials';
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
 import { Heading } from '@ckeditor/ckeditor5-heading';
 import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
-import AnchorDrupal from '../src/anchordrupal.js';
+
+import Anchor from '../src/anchor.js';
 
 /* global document */
 
-describe( 'AnchorDrupal', () => {
+describe( 'Anchor', () => {
 	it( 'should be named', () => {
-		expect( AnchorDrupal.pluginName ).to.equal( 'AnchorDrupal' );
+		expect( Anchor.pluginName ).to.equal( 'Anchor' );
 	} );
 
 	describe( 'init()', () => {
@@ -25,7 +26,7 @@ describe( 'AnchorDrupal', () => {
 					Paragraph,
 					Heading,
 					Essentials,
-					AnchorDrupal
+					Anchor
 				],
 				toolbar: [
 					'anchorDrupal'
@@ -38,10 +39,10 @@ describe( 'AnchorDrupal', () => {
 			return editor.destroy();
 		} );
 
-		it( 'should load AnchorDrupal', () => {
-			const myPlugin = editor.plugins.get( 'AnchorDrupal' );
+		it( 'should load Anchor', () => {
+			const myPlugin = editor.plugins.get( 'Anchor' );
 
-			expect( myPlugin ).to.be.an.instanceof( AnchorDrupal );
+			expect( myPlugin ).to.be.an.instanceof( Anchor );
 		} );
 
 		it( 'should add an icon to the toolbar', () => {

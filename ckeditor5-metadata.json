@@ -2,9 +2,9 @@
   "plugins": [
     {
       "name": "Anchor drupal",
-      "className": "AnchorDrupal",
+      "className": "Anchor",
       "description": "Adds text to the editor.",
-      "path": "src/anchordrupal.js",
+      "path": "src/index.js",
       "uiComponents": [
         {
           "name": "anchorDrupal",

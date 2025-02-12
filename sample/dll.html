@@ -85,9 +85,8 @@
 
 	CKEditor5.editorClassic.ClassicEditor
 		.create( document.querySelector( '#editor' ), {
-			licenseKey: 'GPL',
 			plugins: [
-				CKEditor5[ 'anchorDrupal' ].AnchorDrupal,
+				CKEditor5[ 'anchorDrupal' ].Anchor,
 				CKEditor5.essentials.Essentials,
 				CKEditor5.autoformat.Autoformat,
 				CKEditor5.blockQuote.BlockQuote,
@@ -111,7 +110,7 @@
 				CKEditor5.upload.Base64UploadAdapter
 			],
 			toolbar: [
-				'anchorDrupal',
+				'anchor',
 				'|',
 				'heading',
 				'|',
