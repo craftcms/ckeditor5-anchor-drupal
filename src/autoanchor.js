@@ -7,10 +7,8 @@
  * @module anchor/autoanchor
  */
 
-import { Plugin } from 'ckeditor5/src/core';
-import { TextWatcher } from 'ckeditor5/src/typing';
-import { getLastTextLine } from 'ckeditor5/src/typing';
-import { addAnchorProtocolIfApplicable } from './utils';
+import { getLastTextLine, Plugin, TextWatcher } from 'ckeditor5';
+import { addAnchorProtocolIfApplicable } from './utils.js';
 
 const MIN_LINK_LENGTH_WITH_SPACE_AT_END = 4; // Ie: "t.co " (length 5).
 
@@ -18,7 +16,7 @@ const URL_REG_EXP = new RegExp(
 	// Group 1: Line start or after a space.
 	'(^|\\s)' +
 	// Group 2: Detected anchor (begin with #, follows HTML5 restrictions on
-  // allowed values).
+	// allowed values).
 	'(#\\S+)'
 );
 
@@ -194,7 +192,7 @@ export default class AutoAnchor extends Plugin {
 		model.enqueueChange( writer => {
 			const defaultProtocol = this.editor.config.get( 'anchor.defaultProtocol' );
 			const parsedUrl = addAnchorProtocolIfApplicable( anchor, defaultProtocol );
-      // Create a link to an anchor with the parsed value.
+			// Create a link to an anchor with the parsed value.
 			writer.setAttribute( 'linkHref', parsedUrl, range );
 		} );
 	}

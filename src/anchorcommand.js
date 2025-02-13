@@ -7,13 +7,9 @@
  * @module anchor/anchorcommand
  */
 
-import { Command } from 'ckeditor5/src/core';
-import { findAttributeRange } from 'ckeditor5/src/typing';
-import { toMap } from 'ckeditor5/src/utils';
-import { Collection } from 'ckeditor5/src/utils';
-import { first } from 'ckeditor5/src/utils';
-import AutomaticDecorators from './utils/automaticdecorators';
-import { isImageAllowed } from './utils';
+import { Collection, Command, findAttributeRange, first, toMap } from 'ckeditor5';
+import AutomaticDecorators from './utils/automaticdecorators.js';
+import { isImageAllowed } from './utils.js';
 
 /**
  * The anchor command. It is used by the {@link module:anchor/anchor~Anchor anchor feature}.
@@ -189,7 +185,7 @@ export default class AnchorCommand extends Command {
 				// So, if `id` is empty, do not create text node.
 				else if ( id !== '' ) {
 					const attributes = toMap( selection.getAttributes() );
-					attributes.set('anchorId', id);
+					attributes.set( 'anchorId', id );
 
 					truthyManualDecorators.forEach( item => {
 						attributes.set( item, true );
@@ -207,12 +203,12 @@ export default class AnchorCommand extends Command {
 				[ 'anchorId', ...truthyManualDecorators, ...falsyManualDecorators ].forEach( item => {
 					writer.removeSelectionAttribute( item );
 				} );
-			} else if (selection.getSelectedElement()?.name === 'anchor') {
+			} else if ( selection.getSelectedElement()?.name === 'anchor' ) {
 				// Replace an invisible anchor.
-				const anchor = writer.createElement('anchor', {
+				const anchor = writer.createElement( 'anchor', {
 					anchorId: id
-				});
-				model.insertObject(anchor, null, null, { setSelection: 'on' });
+				} );
+				model.insertObject( anchor, null, null, { setSelection: 'on' } );
 			} else {
 				// If selection has non-collapsed ranges, we change attribute on nodes inside those ranges
 				// omitting nodes where the `anchorId` attribute is disallowed.

@@ -1,9 +1,7 @@
-@northernco/ckeditor5-anchor-drupal
+@craftcms/ckeditor5-anchor-craftcms
 ===================================
 
-This package implements the anchor feature for CKEditor 5. It allows inserting anchor elements (ID field) into the edited content and offers the UI to create and edit them.
-
-This is a Drupal-adapted fork of [the original plugin by bvedad](https://github.com/bvedad/ckeditor5-anchor). 
+This package was created by the [ckeditor5-package-generator](https://www.npmjs.com/package/ckeditor5-package-generator) package.
 
 ## Table of contents
 
@@ -13,20 +11,17 @@ This is a Drupal-adapted fork of [the original plugin by bvedad](https://github.
   * [`test`](#test)
   * [`lint`](#lint)
   * [`stylelint`](#stylelint)
-  * [`dll:build`](#dllbuild)
-  * [`dll:serve`](#dllserve)
-  * [`translations:collect`](#translationscollect)
-  * [`translations:download`](#translationsdownload)
-  * [`translations:upload`](#translationsupload)
+  * [`build:dist`](#builddist)
+  * [`translations:synchronize`](#translationssynchronize)
+  * [`translations:validate`](#translationsvalidate)
 * [License](#license)
 
 ## Developing the package
 
-To read about the CKEditor 5 framework, visit the [CKEditor5 documentation](https://ckeditor.com/docs/ckeditor5/latest/framework/index.html).
+To read about the CKEditor 5 Framework, visit the [CKEditor 5 Framework documentation](https://ckeditor.com/docs/ckeditor5/latest/framework/index.html).
 
 ## Available scripts
-
-Npm scripts are a convenient way to provide commands in a project. They are defined in the `package.json` file and shared with other people contributing to the project. It ensures that developers use the same command with the same options (flags).
+NPM scripts are a convenient way to provide commands in a project. They are defined in the `package.json` file and shared with people contributing to the project. It ensures developers use the same command with the same options (flags).
 
 All the scripts can be executed by running `npm run <script>`. Pre and post commands with matching names will be run for those as well.
 
@@ -34,9 +29,9 @@ The following scripts are available in the package.
 
 ### `start`
 
-Starts a HTTP server with the live-reload mechanism that allows previewing and testing plugins available in the package.
+Starts an HTTP server with the live-reload mechanism that allows previewing and testing of plugins available in the package.
 
-When the server has been started, the default browser will open the developer sample. This can be disabled by passing the `--no-open` option to that command.
+When the server starts, the default browser will open the developer sample. This can be disabled by passing the `--no-open` option to that command.
 
 You can also define the language that will translate the created editor by specifying the `--language [LANG]` option. It defaults to `'en'`.
 
@@ -55,12 +50,7 @@ npm run start -- --language=de
 
 ### `test`
 
-Allows executing unit tests for the package, specified in the `tests/` directory. The command accepts the following modifiers:
-
-* `--coverage` &ndash; to create the code coverage report,
-* `--watch` &ndash; to observe the source files (the command does not end after executing tests),
-* `--source-map` &ndash; to generate source maps of sources,
-* `--verbose` &ndash; to print additional webpack logs.
+Allows executing unit tests for the package specified in the `tests/` directory. To check the code coverage, add the `--coverage` modifier. See other [CLI flags](https://vitest.dev/guide/cli.html) in Vitest.
 
 Examples:
 
@@ -69,7 +59,7 @@ Examples:
 npm run test
 
 # Generate code coverage report after each change in the sources.
-npm run test -- --coverage --test
+npm run test -- --coverage
 ```
 
 ### `lint`
@@ -94,77 +84,52 @@ Examples:
 npm run stylelint
 ```
 
-### `dll:build`
+### `build:dist`
 
-Creates a DLL-compatible package build which can be loaded into an editor using [DLL builds](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/dll-builds.html).
-
-Examples:
-
-```bash
-# Build the DLL file that is ready to publish.
-npm run dll:build
-
-# Build the DLL file and listen to changes in its sources.
-npm run dll:build -- --watch
-```
-
-### `dll:serve`
-
-Creates a simple HTTP server (without the live-reload mechanism) that allows verifying whether the DLL build of the package is compatible with the CKEditor 5 [DLL builds](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/dll-builds.html).
+Creates npm and browser builds of your plugin. These builds can be added to the editor following the [Configuring CKEditor 5 features](https://ckeditor.com/docs/ckeditor5/latest/getting-started/setup/configuration.html) guide.
 
 Examples:
 
 ```bash
-# Starts the HTTP server and opens the browser.
-npm run dll:serve
+# Builds the `npm` and browser files thats are ready to publish.
+npm run build:dist
 ```
 
-### `translations:collect`
+### `translations:synchronize`
 
-Collects translation messages (arguments of the `t()` function) and context files, then validates whether the provided values do not interfere with the values specified in the `@ckeditor/ckeditor5-core` package.
+Synchronizes translation messages (arguments of the `t()` function) by performing the following steps:
+
+ * Collect all translation messages from the package by finding `t()` calls in source files.
+ * Detect if translation context is valid, i.e. whether the provided values do not interfere with the values specified in the `@ckeditor/ckeditor5-core` package.
+ * If there are no validation errors, update all translation files (`*.po` files) to be in sync with the context file:
+   * unused translation entries are removed,
+   * missing translation entries are added with empty string as the message translation,
+   * missing translation files are created for languages that do not have own `*.po` file yet.
 
 The task may end with an error if one of the following conditions is met:
 
 * Found the `Unused context` error &ndash; entries specified in the `lang/contexts.json` file are not used in source files. They should be removed.
-* Found the `Context is duplicated for the id` error &ndash; some of the entries are duplicated. Consider removing them from the `lang/contexts.json` file, or rewrite them.
-* Found the `Context for the message id is missing` error &ndash; entries specified in source files are not described in the `lang/contexts.json` file. They should be added.
+* Found the `Duplicated contex` error &ndash; some of the entries are duplicated. Consider removing them from the `lang/contexts.json` file, or rewriting them.
+* Found the `Missing context` error &ndash; entries specified in source files are not described in the `lang/contexts.json` file. They should be added.
 
 Examples:
 
 ```bash
-npm run translations:collect
+npm run translations:synchronize
 ```
 
-### `translations:download`
+### `translations:validate`
 
-Download translations from the Transifex server. Depending on users' activity in the project, it creates translations files used for building the editor.
-
-The task requires passing the URL to Transifex API. Usually, it matches the following format: `https://www.transifex.com/api/2/project/[PROJECT_SLUG]`.
-
-To avoid passing the `--transifex` option every time when calls the command, you can store it in `package.json`, next to the `ckeditor5-package-tools translations:download` command.
+Peforms only validation steps as described in [`translations:synchronize`](#translationssynchronize) script, but without modifying any files. It only checks the correctness of the context file against the `t()` function calls.
 
 Examples:
 
 ```bash
-npm run translations:download -- --transifex [API URL]
-```
-
-### `translations:upload`
-
-Uploads translation messages onto the Transifex server. It allows for the creation of translations into other languages by users using the Transifex platform.
-
-The task requires passing the URL to the Transifex API. Usually, it matches the following format: `https://www.transifex.com/api/2/project/[PROJECT_SLUG]`.
-
-To avoid passing the `--transifex` option every time when you call the command, you can store it in `package.json`, next to the `ckeditor5-package-tools translations:upload` command.
-
-Examples:
-
-```bash
-npm run translations:upload -- --transifex [API URL]
+npm run translations:validate
 ```
 
 ## License
 
-The `@northernco/ckeditor5-anchor-drupal` package is available under [MIT license](https://opensource.org/licenses/MIT).
+The `@craftcms/ckeditor5-anchor-craftcms` package is available under [MIT license](https://opensource.org/licenses/MIT).
 
-However, it is the default license of packages created by the [ckeditor5-package-generator](https://www.npmjs.com/package/ckeditor5-package-generator) package and it can be changed.
+However, it is the default license of packages created by the [ckeditor5-package-generator](https://www.npmjs.com/package/ckeditor5-package-generator) package and can be changed.

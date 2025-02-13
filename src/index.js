@@ -6,5 +6,12 @@
  * I.e. this file's purpose is to make plugin(s) discoverable.
  */
 // cSpell:ignore simplebox
+import anchor from '../theme/icons/anchor.svg';
+import unanchor from '../theme/icons/unanchor.svg';
 
-export { default as Anchor } from './anchor';
+export { default as Anchor } from './anchor.js';
+
+export const icons = {
+  anchor,
+  unanchor,
+}

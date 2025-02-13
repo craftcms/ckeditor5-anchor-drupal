@@ -7,17 +7,9 @@
  * @module anchor/ui/anchoractionsview
  */
 
-import { View } from 'ckeditor5/src/ui';
-import { ViewCollection } from 'ckeditor5/src/ui';
-
-import { ButtonView } from 'ckeditor5/src/ui';
-
-import { FocusTracker } from 'ckeditor5/src/utils';
-import { FocusCycler } from 'ckeditor5/src/ui';
-import { KeystrokeHandler } from 'ckeditor5/src/utils';
+import { ButtonView, FocusCycler, FocusTracker, icons, KeystrokeHandler, View, ViewCollection } from 'ckeditor5';
 
 import unanchorIcon from '../../theme/icons/unanchor.svg';
-import { icons } from 'ckeditor5/src/core';
 import '../../theme/anchoractions.css';
 import '@ckeditor/ckeditor5-ui/theme/components/responsive-form/responsiveform.css';
 

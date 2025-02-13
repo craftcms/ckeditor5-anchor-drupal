@@ -7,17 +7,10 @@
  * @module anchor/anchorui
  */
 
-import { Plugin } from 'ckeditor5/src/core';
-import { ClickObserver } from 'ckeditor5/src/engine';
-import { addAnchorProtocolIfApplicable, isAnchorElement, LINK_KEYSTROKE } from './utils';
-
-import { ContextualBalloon } from 'ckeditor5/src/ui';
-
-import { clickOutsideHandler } from 'ckeditor5/src/ui';
-
-import { ButtonView } from 'ckeditor5/src/ui';
-import AnchorFormView from './ui/anchorformview';
-import AnchorActionsView from './ui/anchoractionsview';
+import { ButtonView, ClickObserver, clickOutsideHandler, ContextualBalloon, Plugin } from 'ckeditor5';
+import { addAnchorProtocolIfApplicable, isAnchorElement, LINK_KEYSTROKE } from './utils.js';
+import AnchorFormView from './ui/anchorformview.js';
+import AnchorActionsView from './ui/anchoractionsview.js';
 
 import anchorIcon from '../theme/icons/anchor.svg';
 

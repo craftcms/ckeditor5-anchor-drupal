@@ -7,11 +7,8 @@
  * @module anchor/anchorimageediting
  */
 
-import { Plugin } from 'ckeditor5/src/core';
-import { ImageEditing } from 'ckeditor5/src/image';
-import { Matcher } from 'ckeditor5/src/engine';
-import { toMap } from 'ckeditor5/src/utils';
-import { AnchorEditing } from './anchorediting';
+import { ImageEditing, Matcher, Plugin, toMap } from 'ckeditor5';
+import { AnchorEditing } from './anchorediting.js';
 
 import anchorIcon from '../theme/icons/anchor.svg';
 

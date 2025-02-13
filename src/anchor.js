@@ -7,10 +7,10 @@
  * @module anchor/anchor
  */
 
-import { Plugin } from 'ckeditor5/src/core';
-import AnchorEditing from './anchorediting';
-import AnchorUI from './anchorui';
-import AutoAnchor from './autoanchor';
+import { Plugin } from 'ckeditor5';
+import AnchorEditing from './anchorediting.js';
+import AnchorUI from './anchorui.js';
+import AutoAnchor from './autoanchor.js';
 
 /**
  * The anchor plugin.

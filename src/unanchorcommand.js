@@ -7,10 +7,8 @@
  * @module anchor/unanchorcommand
  */
 
-import { Command } from 'ckeditor5/src/core';
-import { findAttributeRange } from 'ckeditor5/src/typing';
-import { first } from 'ckeditor5/src/utils';
-import { isImageAllowed } from './utils';
+import { Command, findAttributeRange, first } from 'ckeditor5';
+import { isImageAllowed } from './utils.js';
 
 /**
  * The unanchor command. It is used by the {@link module:anchor/anchor~Anchor anchor plugin}.
@@ -78,8 +76,8 @@ export default class UnanchorCommand extends Command {
 			}
 
 			// Remove an invisible anchor.
-			if (selection.getSelectedElement()?.name === 'anchor') {
-				model.deleteContent(selection);
+			if ( selection.getSelectedElement()?.name === 'anchor' ) {
+				model.deleteContent( selection );
 			}
 		} );
 	}
