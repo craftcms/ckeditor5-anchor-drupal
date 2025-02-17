@@ -1,4 +1,4 @@
-@craftcms/ckeditor5-anchor-craftcms
+@craftcms/ckeditor5-anchor-drupal
 ===================================
 
 This package was created by the [ckeditor5-package-generator](https://www.npmjs.com/package/ckeditor5-package-generator) package.
